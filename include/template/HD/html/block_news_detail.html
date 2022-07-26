@@ -1,0 +1,26 @@
+<div class="personal_page">
+    <div style="background-color:#fff;" id="NewsContent">
+        <div class="divHeaderTitle"><span>TIN TỨC</span></div>
+        <div class="divNewsItem">
+            <div class="divTitle">
+                <span><a href="#">{$news['title']}</a></span><span>${date('H:i, d-m-Y',$news['create_time'])}</span>
+            </div>
+            <div class="clear"></div>
+            <div class="divContent">{$news['detail']}</div>
+        </div>
+        <div class="clear"></div>
+        <!--{if $news_others}-->
+        <div class="divOtherNews">
+            <div class="divTitle">Các tin đã đăng</div>
+            <div class="divContent">
+                <ul>
+                    <!--{loop $news_others $index $one}-->
+                    <li><a href="${rewrite_news_id($one['id'])}">{$one['title']}</a></li>
+                    <!--{/loop}-->
+                    
+                </ul>
+            </div>
+        </div>
+        <!--{/if}-->
+    </div>
+    </div>

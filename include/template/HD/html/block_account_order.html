@@ -1,0 +1,79 @@
+<div class="personal_page">
+
+    <div class="personal-nav">
+        <div class="nav-bar-bg">
+        </div>
+        <div class="personal-bar">
+            <ul>${current_account2()}</ul>
+        </div>
+    </div>
+
+    <div class="personal-content">
+            <div class="table-content">
+                <table width="100%" cellspacing="0" cellpadding="0" class="lstable">
+                    <thead>
+                    	<tr>
+                            <th width="6%">STT</th>
+                            <th width="20%">Mã đơn hàng</th>
+                            <th width="20%">Ngày đặt hàng</th>
+                            <th width="25%">Tình trạng đơn hàng</th>
+                            <th width="25%">Hình thức thanh toán</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    	<!--{loop $orders $order $one}-->
+                        <!--{if $order%2==0}-->
+                        <tr class="even">
+                        <!--{else}-->
+                        <tr class="odd">
+                        <!--{/if}-->
+                            <td class="center">${++$order}</td>
+                            <td>
+                                <a title="Xem chi tiết đơn hàng" orderid="{$one['id']}" class="btnViewDetail" href="javascript:void(0)">{$one['order_code']}</a>
+                                <!--{include block_popup_order_detail}-->
+                            </td>
+                            <td>${date('d/m/Y H:i:s', $one['create_time'])}</td>
+                            <td>
+                            	<!--{if $one['order_state']=='cancel'}-->
+                                <span class="imgstt"><img alt="" src="{$template_path}/dahuy_ico.png"></span>Đã hủy
+                                <!--{elseif $one['order_state']=='pending'}-->
+                                <span class="imgstt"><img alt="" src="{$template_path}/chuaxuly_ico.png"></span>Chờ xử lý
+                                <!--{elseif $one['order_state']=='comfirmed'}-->
+                                <span class="imgstt"><img alt="" src="{$template_path}/daxacnhan_ico.png"></span>Đã xác nhận
+                                <!--{else}-->
+                                <span class="imgstt"><img alt="" src="{$template_path}/thanhcong_ico.png"></span>Thành công
+                                <!--{/if}-->
+                            </td>
+                            <td>
+                                {$methods[$one['method_id']]['name']} 
+                                <a posit="{$one['method_id']}" title="Xem chi tiết" href="#" class="ttlook btnLookupTT"></a>
+                            </td>
+                        </tr>
+                        <!--{/loop}-->
+                    </tbody>
+                </table>
+            </div>
+            <!--{if $display_page}-->
+            {$pagestring}
+            <!--{/if}-->
+            <div class="pttt-box pttt-index-0">
+                <div class="title boldGreen">Phương thức thanh toán</div>
+                <div class="content">
+                	<!--{loop $methods $index $one}-->
+                    <div class="content-item  pttt-index-{$one['id']}">
+                        <div class="item-title">
+                            <span class="icon"><img alt="" src="{$template_path}/{$one['linkimg']}"></span> 
+                            <span class="title  boldGreen">{$one['name']}</span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="item-content">{$one['desc']}</div>
+                        <div class="clear"></div>
+                    </div>
+                    <!--{/loop}-->
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    <div class="clear"></div>
+</div>

@@ -1,0 +1,114 @@
+<div class="gopy_box deal_out">
+    <div class="gopy_all_b">
+        <div class="gopy_title">
+            <span class="top_pop_left">
+                <img style="position:relative;top:17px;float:left;margin-left:5px;" src="{$template_path}/top_bul.png" alt=""/>
+            </span>
+            <span style="float:left;margin-left:10px;text-transform:uppercase;">MUA HÀNG NHANH</span>
+            <span class="btnGopyclose">
+                <img title="{$tenngan} - Tắt của sổ này" src="{$template_path}/new_close_btn.png" alt="Đóng" />
+            </span>
+        </div>
+		<div class="clear"></div>
+		<div class="proBody_body">            <div class="Promo_dt_bg">                
+		<div class="Promo_dt_div">    
+		<div class="Promo_dt_cont">   
+			<div class="col_left"> 
+			<div class="img_bg">
+			<img width="200" height="120" alt="{$team['product']}" src="${team_image($team['image'])}"/>                            
+			</div>
+			</div>
+		<div class="col_right">
+		<p class="link name">{$team['product']}</p> 
+		<div class="muanhanh">
+                                <div class="deal_value">Giá gốc: <span>${formatMoney($team['market_price'])}đ</span></div>
+                                <div class="deal_save">
+                                	Giá bán: <span>${formatMoney($team['team_price'])}đ</span>
+                                </div>
+        </div>
+		</div>
+	
+		</div>            
+		</div>        
+		</div>       
+		</div>
+        <div class="gopy_content">
+		<div class="gopy_notice"></div>
+            <form id="frmgopy" method="post" action="#">
+			<input type="hidden" value="{$team['id']}" name="teamid"/>
+                <div class="gopy_item">
+                    <span class="gopy_ileft">Họ tên:<span class="gopy_require">*</span></span>
+                    <span class="gopy_iright">
+                        <input id="tbxGopyFullName" name="tbxGopyFullName" class="gopy_input" style="margin:4px;" type="text"/>
+                    </span>
+                </div>
+
+                <div class="gopy_item">
+                    <span class="gopy_ileft">Email:<span class="gopy_require">*</span></span>
+                    <span class="gopy_iright">
+                        <input id="tbxGopyEmail" name="tbxGopyEmail" class="gopy_input" style="margin:4px;" type="text"/>
+                    </span>
+                </div>
+
+                <div class="gopy_item">
+					<span class="gopy_ileft">Điện thoại:<span class="gopy_require">*</span></span>
+                    <span class="gopy_iright">
+                        <input id="tbxGopyPhone" name="tbxGopyPhone" class="gopy_input" style="margin:4px;width:120px;" maxlength="12" onkeypress="blockNotPhoneNumber(event)" type="text"/>
+                    </span>
+                    <span class="gopy_ileft">Số lượng:<span class="gopy_require">*</span></span>
+                    <span class="gopy_iright">
+					<select name="soluong" style="border:1px solid;font-size:16px; font-weight:bold">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					</select>
+                    </span>
+                </div>
+				<div class="gopy_item">
+                        <span class="gopy_ileft">Tỉnh thành:<span class="gopy_require">*</span></span>
+                        <span class="gopy_iright">
+                            <select id="Province1" name="Province" style="width: 205px;border:1px solid;">
+                            	${Utility::Option($option_provinces,'','Chọn Thành Phố')}
+                            </select>
+                        </span>
+                    </div>
+                    <div class="gopy_item">
+                        <span class="gopy_ileft">Quận huyện:<span class="gopy_require">*</span></span>
+                        <span class="gopy_iright">
+                            <select id="District1" name="DistrictID_s" style="width: 205px;border:1px solid;">
+                            	<option value="0">Chọn Quận Huyện</option>
+                            </select>
+                        </span>
+                    </div>
+                <div class="gopy_item" style="margin-top: 4px;margin-left: 4px;">
+                    <span class="gopy_ileft">Địa chỉ:<span class="gopy_require">*</span></span>
+                    <span class="gopy_iright">
+                        <input id="tbxGopYContent" name="tbxGopYContent" class="gopy_input" maxlength="200" type="text"/>
+                    </span>
+                </div>
+				<div class="gopy_item" style="margin-top: 4px;margin-left: 4px;">
+                    <span class="gopy_ileft">Ghi chú:</span>
+                    <span class="gopy_iright">
+                        <input id="tbxNote" name="tbxNote" class="gopy_area" maxlength="200" type="text"/>
+                    </span>
+                </div>
+                <div class="gopy_item" style="line-height:40px;">
+     
+                        <span style="float:right;margin-top:8px;margin-right:35px; cursor:pointer" class="btn_gopy">
+						<b id="btnGopY" class="btn_send" style="margin:0"><img src="/include/template/HD/css/images/btngopy.png"></b>
+						</span>
+                    </span>
+                </div>
+                
+
+            </form>
+        </div>
+    </div>
+</div>

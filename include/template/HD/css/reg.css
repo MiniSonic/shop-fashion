@@ -1,0 +1,654 @@
+﻿#boxes .window {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 440px;
+    height: 200px;
+    display: none;
+    z-index: 9999
+}
+
+#boxes #dialog {
+    width: 500px;
+    height: 250px;
+    background: none repeat scroll 0 0 rgba(255,255,255,.24);
+    border-radius: 5px 5px 5px 5px;
+    padding: 5px;
+    z-index: 10000
+}
+
+.classic-popup {
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    display: block
+}
+
+.forgot-top {
+    width: 100%;
+    float: left;
+    line-height: 40px;
+    background: url("images/new_pop_top_img_bg.png") repeat-x scroll left top #5b9d05;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 14px;
+    width: 100%;
+    text-shadow: 0 1px 0 #666
+}
+
+.forgot-title {
+    float: left;
+    margin-top: 3px;
+    margin-left: 5px;
+    font-weight: bold
+}
+
+.close-icon {
+    float: right;
+    margin-right: 3px;
+    margin-top: 11px;
+    cursor: pointer
+}
+
+.huongdan {
+    float: left;
+    text-align: justify;
+    margin: 5px 10px;
+    font-size: 12px;
+    line-height: 30px;
+	color:#333;
+
+}
+
+
+.forgotform {
+    float: left;
+    width: 100%
+}
+
+.forgot-item {
+    float: left;
+    width: 100%;
+    margin-bottom: 5px;
+	color:#333;
+}
+
+.forgot-item-title {
+    float: left;
+    width: 100px;
+    text-align: right;
+    margin-top: 6px
+}
+
+.forgot-item-input {
+    float: left;
+    margin-left: 5px
+}
+
+.forgot-item-input input {
+    border: solid 1px #cdcdcd;
+    height: 22px
+}
+
+.cpt_img {
+    float: left;
+    margin-left: 5px;
+    margin-top: 2px
+}
+
+.cpt_img img {
+    float: left
+}
+
+.forgot-item-btn {
+    float: left;
+    height: 23px;
+    width: 75px;
+    background: url("images/BtnGreenBlue.png") no-repeat center top
+}
+
+.forgot-item-btn:hover {
+    background-position: 0 -23px;
+    cursor: pointer
+}
+
+.forgot-item-btn a {
+    float: left;
+    width: 100%;
+    text-align: center;
+    line-height: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff
+}
+
+.fwaiting {
+    float: left;
+    margin-left: 20px;
+    margin-top: 3px;
+    display: none
+}
+
+.register-popup ul,.register-popup li {
+    list-style: none
+}
+
+.register-popup {
+    display: none;
+    background: none repeat scroll 0 0 rgba(255,255,255,.24);
+    border-radius: 3px 3px 3px 3px;
+    padding: 5px;
+    z-index: 10000;
+    position: fixed
+}
+
+.register-popup .btnClose {
+    float: right;
+    display: block
+}
+
+.register-popup .btnClose a {
+    float: right;
+    cursor: pointer;
+    width: 15px;
+    line-height: 48px;
+    margin-top:12px;
+    width: 18px;
+    height: 18px;
+    background-image: url('images/new_close_btn.png')
+}
+
+.register-popup .wrap_cart {
+    width: 690px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px
+}
+
+.register-popup .cart_top {
+    width: 100%;
+    float: left;
+    height: 36px;
+    background: url(images/cart_title_top_bg.png) no-repeat top center
+}
+
+.register-popup .cart_top_thanhtoan {
+    background-position: 0 -36px
+}
+
+.register-popup .cart_top_camon {
+    background-position: 0 -72px
+}
+
+.register-popup .cart_content {
+    width: 100%;
+    float: left;
+    margin-top: 20px
+}
+
+.register-popup .popup-title {
+    width: 100%;
+    float: left;
+    height: 48px;
+    background: url("images/new_pop_top_img_bg.png") repeat-x scroll left top #5b9d05
+}
+
+.register-popup .popup-title span.title {
+    float: left;
+    font-size: 130%;
+    font-weight: bold;
+    line-height: 48px;
+    color: #fff;
+    text-indent: 20px
+}
+
+.register-popup .c_title-ico {
+}
+
+.register-popup .c_title_text {
+    float: left;
+    margin-left: 10px;
+    font-size: 12.85pt;
+    text-transform: uppercase;
+    color: #6fcc00;
+    font-weight: bold;
+    margin-top: 5px
+}
+
+.register-popup .cart_content_title {
+    width: 100%;
+    float: left;
+    background: url(images/cart_title_bg.png) no-repeat top center;
+    height: 31px;
+    margin-top: 10px
+}
+
+.register-popup .cart_content_title span {
+    float: left;
+    margin-top: 6px;
+    font-size: 13px;
+    text-align: center
+}
+
+.register-popup .title-del {
+    width: 45px;
+    margin-left: 10px
+}
+
+.register-popup .title-product {
+    width: 260px
+}
+
+.register-popup .title-product a {
+    color: #595959;
+    font-size: 10pt
+}
+
+.register-popup .title-product a:hover {
+    color: #74c043
+}
+
+.register-popup .title-price {
+    width: 100px
+}
+
+.register-popup .title-soluong {
+    width: 120px
+}
+
+.register-popup .title-thanhtien {
+    width: 135px
+}
+
+.register-popup .cart_listitem {
+    width: 665px;
+    margin-left: 10px;
+    float: left;
+    border-left: solid 1px #e1e1e1;
+    border-bottom: solid 1px #e1e1e1;
+    border-right: solid 2px #e1e1e1;
+    background-color: #f9f9f9
+}
+
+.register-popup .cart_item {
+    width: 100%;
+    float: left
+}
+
+.register-popup .cart_item .item_row {
+    float: left;
+    height: 50px;
+    border-left: solid 1px #e1e1e1;
+    border-bottom: solid 1px #e1e1e1
+}
+
+.register-popup .cart_item .item_row select {
+    border: solid 1px #e1e1e1;
+    background-color: #fff;
+    width: 60px;
+    cursor: pointer;
+    text-align: center
+}
+
+.register-popup .cart_item span {
+    float: left;
+    margin-top: 15px;
+    font-size: 13px;
+    text-align: center
+}
+
+.register-popup .sum_item {
+    float: left;
+    width: 100%;
+    height: 35px;
+    border-bottom: solid 1px #ccc;
+    border-left: solid 1px #e1e1e1
+}
+
+.register-popup .sum_item p {
+    width: 100%;
+    float: left;
+    margin-top: 8px
+}
+
+.register-popup .sum_item_title {
+    float: left;
+    width: 528px;
+    text-align: right;
+    height: 35px
+}
+
+.register-popup .sum_item_value {
+    float: left;
+    border-left: solid 1px #e1e1e1;
+    height: 35px;
+    width: 135px;
+    text-align: center
+}
+
+.register-popup .sum_item_value_price {
+    float: left;
+    border-left: solid 1px #e1e1e1;
+    height: 35px;
+    width: 135px;
+    text-align: center
+}
+
+.register-popup .sum_item_value_total {
+    float: left;
+    border-left: solid 1px #e1e1e1;
+    height: 35px;
+    width: 135px;
+    text-align: center
+}
+
+.register-popup .continous-shop {
+    background: url("images/btn_tiep_tuc_mua_hang_bg_07_02_2012.png") no-repeat scroll center top transparent;
+    float: left;
+    height: 110px;
+    margin-left: 10px;
+    width: 205px
+}
+
+.register-popup .btn_ctn_b {
+    float: left;
+    margin-top: 17px;
+    margin-left: 45px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff
+}
+
+.register-popup .btn_ctn_b a {
+    text-decoration: none;
+    text-transform: none;
+    color: inherit
+}
+
+.register-popup .btn_ctn_b a:hover {
+    color: #1aa9d3
+}
+
+.register-popup .shadow {
+    -moz-box-shadow: 5px 5px 5px #fff;
+    -webkit-box-shadow: 5px 5px 5px #fff
+}
+
+.register-popup .cart_login {
+    width: 100%;
+    float: left;
+    margin-top: 15px;
+    margin-left: 10px
+}
+
+.register-popup .info_box {
+    width: 100%;
+    float: left;
+    margin-top: 10px
+}
+
+.register-popup .info_box_top {
+    width: 100%;
+    float: left;
+    height: 3px
+}
+
+.register-popup .register-content {
+    float: left
+}
+
+.register-popup .info_box_bottom {
+    width: 100%;
+    float: left;
+    height: 2px
+}
+
+.register-popup .mem-register {
+    width: 680px;
+    float: left;
+    display: block;
+    background-color: #fff
+}
+
+.register-popup .login_user {
+    float: left;
+    width: 390px;
+    margin-top: 25px
+}
+
+.register-popup .email_lg {
+    width: 60px;
+    float: left;
+    margin-left: 10px;
+    text-align: right
+}
+
+.register-popup .email_pass_t {
+    font-size: 11pt;
+    color: #595959;
+    margin-top: 3px;
+    word-spacing: .5px
+}
+
+.register-popup .email_input {
+    float: left;
+    margin-left: 5px
+}
+
+.register-popup .email_input input {
+    width: 300px;
+    height: 22px;
+    border: solid 1px #e1e1e1;
+    background-color: #fff
+}
+
+.register-popup .login_pass {
+    float: left;
+    width: 260px;
+    margin-top: 25px
+}
+
+.register-popup .pass_lg {
+    float: left;
+    width: 80px;
+    text-align: right
+}
+
+.register-popup .pass_input {
+    float: left;
+    margin-left: 5px
+}
+
+.pass_input input {
+    width: 165px;
+    height: 22px;
+    border: solid 1px #e1e1e1;
+    background-color: #fff
+}
+
+.register-popup .error_email {
+    float: left;
+    font-size: 12px;
+    color: red;
+    margin-left: 80px
+}
+
+.register-popup .error_pass {
+    float: left;
+    font-size: 12px;
+    color: red;
+    margin-left: 80px
+}
+
+.register-popup .reg-note {
+    float: left;
+    width: 630px;
+    height: 25px;
+    border: solid 1px #e1e1e1;
+    margin-left: 30px;
+    display: none
+}
+
+.register-popup .birth_ddl {
+}
+
+.register-popup .cart_rg_requie {
+    color: red
+}
+
+.register-popup .login_control {
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+.register-popup .loss_password {
+    float: left;
+    margin-left: 405px
+}
+
+.register-popup .loss_password a {
+    text-transform: none;
+    text-decoration: none;
+    color: #62a60b;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 6px;
+    float: left
+}
+
+.register-popup .loss_password a:hover {
+    color: red
+}
+
+.register-popup .loginbtn {
+    float: left;
+    margin-left: 20px;
+    background: url(images/btn_customer_bg.png) no-repeat left top;
+    width: 125px;
+    height: 28px
+}
+
+.register-popup .loginbtn:hover {
+    cursor: pointer;
+    background-position: 0 -28px
+}
+
+.register-popup .loginbtn a {
+    float: left;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 13px;
+    margin-top: 4px;
+    font-weight: 800
+}
+
+.register-popup .loginbtn a:hover {
+}
+
+.register-popup .basic_info {
+    width: 330px;
+    float: left;
+    margin: 10px 0 0 8px;
+    margin-bottom: 20px
+}
+
+.register-popup .regist_item {
+    width: 100%;
+    float: left;
+    margin-top: 10px
+}
+
+.register-popup .regist_title {
+    width: 110px;
+    float: left;
+    text-align: right;
+    margin-top: 3px;
+	color:#333;
+}
+
+.register-popup .regist_input {
+    float: left;
+    margin-left: 6px
+}
+
+.register-popup .regist_input input {
+    width: 200px;
+    height: 25px;
+    border: solid 1px #e1e1e1;
+    padding: 0 2px
+}
+
+.register-popup .regist_control {
+    width: 100%;
+    float: left;
+    margin-top: 0;
+    margin-bottom: 10px
+}
+
+.register-popup .regist_btn1 {
+    float: left;
+    margin-left: 190px;
+    background: url(images/btn_customer_bg.png) repeat-y left top;
+    width: 125px;
+    height: 28px
+}
+
+.register-popup .regist_btn1:hover {
+    cursor: pointer;
+    background-position: 0 -28px
+}
+
+.register-popup .regist_btn1 a {
+    float: left;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 13px;
+    margin-top: 3px;
+    font-weight: 800
+}
+
+.register-popup .regist_btn1 a:hover {
+}
+
+.register-popup .fb_loading {
+    float: left;
+    margin-left: 120px;
+    height: 28px;
+    width: 220px
+}
+
+.register-popup .select_gender {
+    border: solid 1px #e1e1e1;
+    height: 25px;
+    width: 100px;
+    cursor: pointer
+}
+
+.register-popup .regist_input select {
+    border: solid 1px #e1e1e1;
+    height: 25px;
+    cursor: pointer;
+    padding-top: 3px;
+    padding-left: 5px
+}
+
+.register-popup .regist_input select option {
+    padding-left: 5px
+}
+
+.register-popup .hide {
+    display: none
+}
+
+.register-popup .mem-register .register-message {
+    color: red;
+    display: none;
+    font-weight: bold;
+    line-height: 30px;
+    margin-top: 10px;
+    padding: 20px 0 0 0
+}

@@ -1,0 +1,71 @@
+<!--${
+    $daytime = time();
+    $cond_new = array(
+        'city_id' => array(0, abs(intval($city['id']))),
+        "begin_time <= '$daytime'",
+        "end_time > '$daytime'",
+    );
+
+    $newteams = DB::LimitQuery('team', array(
+        'condition' => $cond_new,
+        'order' => 'ORDER BY sort_order DESC, begin_time DESC,  id DESC',
+        'size' => $INI['system']['new_deal_item'],
+    ));
+}-->
+<!--New deal-->
+<div class="title_main" style="padding-top: 15px">
+                <p class="icon_home"><a class="icon_home"></a></p>
+                <h1 class="title_catalog">Khuyến mãi hot</h1>
+            <ul class="filter">
+                <li><a class="" href="/khuyen-mai-moi-nhat.html">Mới nhất</a></li>
+                <li><a class="" href="/khuyen-mai-ban-chay.html">Bán chạy</a></li>
+                <li><a class="" href="/khuyen-mai-top-50.html">Top 50</a></li>                
+                <li><a class="active" href="/">Tất cả</a></li>
+            </ul>
+        </div>
+<div class="showproduct_cate new_deal">
+    <div class="product_cate_content">
+        <div class="ls_cate_product" style="width: auto">
+            <!--{loop $newteams $index $one}-->
+            <div class="cate_product_item">
+                <div class="cate_product_item_img">
+				<span class="deal_common_info discount_percent_nhanhoa">
+                        <span>-${formatMoney($one['percent'])}%</span>
+                    </span>
+                	<!--{if $team_type!='normal'}-->
+                    <span class="ribbon3_{$one['team_type']}"></span>
+                    <!--{/if}-->
+                    <a href="${rewrite_team_id($one['id'])}">
+                        <img alt="{$one['product']}, {$INI['system']['keywordseo']}" src="${team_image($one['image'])}" />
+                    </a>
+                    <div class="cate_product_delivery">
+                    	<span class="cate_product_damua">&nbsp;Đã mua <span>{$one['now_number']}</span></span>
+                    	<span class="cate_product_giaohang">
+                        	<span class="giao_{$one['delivery_type']}"></span>
+                            {$option_giaohang[$one['delivery_type']]}
+                        </span>
+                    </div>
+                </div>
+                <div class="cate_product_item_title">
+                    <a href="${rewrite_team_id($one['id'])}">{$one['product']}</a>
+                </div>
+                <div class="cate_product_item_info">
+                    <span class="deal_common_info sale_prc">${formatMoney($one['team_price'])}đ</span> 
+                    <span class="deal_common_info discount_percent">
+                        <span><a class="btnXemNgay" href="${rewrite_team_id($one['id'])}" title="XEM">XEM</a></span>
+                    </span>
+                    <span class="deal_common_info deal_cmny" style="display: none;">
+                        <span>{$one['bonus']}</span>
+                    </span>
+                    <span class="deal_common_info deal_number_buy">
+                        <span>${formatMoney($one['view']+$one['pre_view'])}</span>người xem
+                    </span>
+                    <span class="deal_timer" id="tg-${++$count_timer}" diff="{$one['end_time']-$daytime}">
+                    	<span class="divtimer" id="timer-{$count_timer}"></span>
+                    </span>
+                </div>
+            </div>
+            <!--{/loop}-->
+        </div>
+    </div>
+</div><!--End new deal-->

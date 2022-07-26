@@ -1,0 +1,496 @@
+<?php include template("manage_header");?>
+
+<script language=Javascript>
+function Inint_AJAX() {
+	try { return new ActiveXObject("Msxml2.XMLHTTP");  } catch(e) {} //IE
+	try { return new ActiveXObject("Microsoft.XMLHTTP"); } catch(e) {} //IE
+	try { return new XMLHttpRequest();          } catch(e) {} //Native Javascript
+	alert("XMLHttpRequest not supported");
+	return null;
+};
+
+function dochange(src, val) {
+ 	var req = Inint_AJAX();
+ 	req.onreadystatechange = function () {
+      if (req.readyState==4) {
+           if (req.status==200) {
+                document.getElementById(src).innerHTML=req.responseText;
+           }
+      }
+ };
+ req.open("GET", "/ajax/cate.php?type="+src+"&id="+val);
+ req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+ req.send(null);
+}
+</script>
+
+
+<div id="bdw" class="bdw">
+
+<div id="bd" class="cf">
+
+<div id="leader">
+
+	<div class="dashboard" id="dashboard"><ul><?php echo mcurrent_team('edit'); ?></ul></div>
+
+	<div id="content" class="clear mainwide">
+
+        <div class="clear box">
+
+            <div class="box-top"></div>
+
+            <div class="box-content">
+
+                <div class="head">
+
+				<?php if($team['id']){?>
+
+					<h2>Sửa deal</h2>
+
+					<ul class="filter"><?php echo current_manageteam('edit', $team['id']); ?></ul>
+
+				<?php } else { ?>
+
+					<h2>Thêm deal mới</h2>
+
+				<?php }?>
+
+				</div>
+
+                <div class="sect">
+
+				<form id="-user-form" method="post" action="/manage/team/edit.php?id=<?php echo $team['id']; ?>" enctype="multipart/form-data" class="validator">
+
+					<input type="hidden" name="id" value="<?php echo $team['id']; ?>" />
+
+					<div class="wholetip clear"><h3>1. Thông tin cơ bản</h3></div>
+
+					<div class="field">
+
+						<label>Danh mục</label>
+
+						<select id="parent" name="group_ppid" class="f-input" style="width:160px;" datatype="require" require="true">
+                        	<?php echo Utility::Option($roots, $team['group_ppid'],'--chọn danh mục--'); ?>
+                      	</select>
+                       <span id="child">                       
+                        	<select name="group_pid" class="f-input" style="width:160px;">
+                            <?php echo Utility::Option($childs, $team['group_pid'],'--danh mục con--'); ?>
+                            </select>
+                       	</span>
+
+					</div>
+
+					<div class="field" id="field_limit">
+
+						<label>Các giới hạn</label>
+						<select name="city_id" class="f-input" style="width:160px;"><?php echo Utility::Option(Utility::OptionArray($allcities, 'id','name'), $team['city_id'], 'Tất cả thành phố'); ?></select>
+						<!--<select name="conduser" class="f-input" style="width:160px;"><?php echo Utility::Option($option_cond, $team['conduser']); ?></select>-->
+
+						<select name="buyonce" class="f-input" style="width:160px;"><?php echo Utility::Option($option_buyonce, $team['buyonce']); ?></select>
+                                        
+                       
+                        
+					</div>
+                    
+					<div class="field">
+
+						<label>Tên sản phẩm</label>
+
+						<input type="text" size="30" name="product" id="team-create-product" class="f-input" value="<?php echo $team['product']; ?>" datatype="require" require="true" />
+
+					</div>
+                    
+					<div class="field">
+
+						<label>Mô tả deal</label>
+
+						<input type="text" size="30" name="title" id="team-create-title" class="f-input" value="<?php echo htmlspecialchars($team['title']); ?>" datatype="require" require="true" style="width:670px;" />
+
+					</div>
+                    <div class="field">
+                    
+                        <label>Hình thức giao</label>
+                        <?php if($team['delivery_type']=='product'){?>
+                        <input type="radio" checked="checked" value="product" name="delivery_type">Giao sản phẩm
+                        <input type="radio" value="voucher" name="delivery_type">Giao voucher
+                        <?php } else { ?>
+                        <input type="radio" value="product" name="delivery_type">Giao sản phẩm
+                        <input type="radio" checked="checked" value="voucher" name="delivery_type">Giao voucher
+                        <?php }?>
+                   	</div>
+                    
+                    <div class="field">
+						<label>Số mua ảo</label>
+
+						<input type="text" size="10" name="pre_number" id="team-create-pre_number" class="number" value="<?php echo moneyit($team['pre_number']); ?>" datatype="number" require="true" />
+                        
+						<label>Số xem ảo</label>
+
+						<input type="text" size="10" name="pre_view" id="team-create-pre_view" class="number" value="<?php echo moneyit($team['pre_view']); ?>" datatype="number" require="true" />
+                    </div>
+                    
+					<div class="field">
+
+						<label>Giá gốc</label>
+
+						<input type="text" size="10" name="market_price" id="team-create-market-price" class="number" value="<?php echo moneyit($team['market_price']); ?>" datatype="money" require="true" />
+
+						<label>Giá giảm</label>
+
+						<input type="text" size="10" name="team_price" id="team-create-team-price" class="number" value="<?php echo moneyit($team['team_price']); ?>" datatype="double" require="true" />
+
+					
+					</div>
+
+					<div class="field">
+
+						<label>Số mua thấp nhất</label>
+
+						<input type="text" size="10" name="min_number" id="team-create-min-number" class="number" value="<?php echo intval($team['min_number']); ?>" maxLength="6" datatype="number" require="true" />
+
+						<label>Số mua cao nhất</label>
+
+						<input type="text" size="10" name="max_number" id="team-create-max-number" class="number" value="<?php echo intval($team['max_number']); ?>" maxLength="6" datatype="number" require="true" />
+
+						<label>Giới hạn lần mua</label>
+
+						<input type="text" size="10" name="per_number" id="team-create-per-number" class="number" value="<?php echo intval($team['per_number']); ?>" maxLength="6" datatype="number" require="true" />
+
+					</div>
+                    
+                    
+                    
+                    
+
+					<div class="field">
+
+						<label>Thời gian bắt đầu</label>
+
+						<input type="text" size="30" name="begin_time" id="" class="number" xd="<?php echo date('Y-m-d', $team['begin_time']); ?>" xt="<?php echo date('H:i:s', $team['begin_time']); ?>" value="<?php echo date('d-m-Y H:i:s', $team['begin_time']); ?>" maxlength="30" onFocus="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                        
+						<label>Thời gian kết thúc</label>
+
+						<input type="text" size="30" name="end_time" id="" class="number" xd="<?php echo date('Y-m-d', $team['end_time']); ?>" xt="<?php echo date('H:i:s', $team['end_time']); ?>" value="<?php echo date('d-m-Y H:i:s', $team['end_time']); ?>" maxlength="30" onFocus="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                        
+						<label>Thời hạn <?php echo $INI['system']['couponname']; ?></label>
+
+						<input type="text" size="30" name="expire_time" id="" class="number" value="<?php echo date('d-m-Y', $team['expire_time']); ?>" maxLength="30" />
+                   	
+                    </div>
+                    
+					<div class="act"><input type="submit" value="Lưu" name="commit" id="leader-submit" class="formbutton" /></div>
+                    
+					<div class="field">
+
+						<label>Điểm nổi bật</label>
+
+						<div style="float:left; width: 80%;"><?php echo $summary; ?></div>
+
+					</div>
+
+					<div class="field">
+
+						<label>Điều kiện</label>
+
+						<div style="float:left; width: 80%;"><?php echo $notice; ?></div>
+
+
+					</div>
+                    
+					<div class="act"><input type="submit" value="Lưu" name="commit" id="leader-submit" class="formbutton" /></div>
+
+					<input type="hidden" name="guarantee" value="Y" />
+
+					<input type="hidden" name="system" value="Y" />
+
+					<div class="wholetip clear"><h3>2. Thông tin deal</h3></div>
+
+					<div class="field">
+
+						<label>Đối tác</label>
+
+						<select name="partner_id" datatype="require" require="require" class="f-input" style="width:200px;"><?php echo Utility::Option($partners, $team['partner_id'], '--chọn đối tác--'); ?></select><span class="inputtip">Đây chỉ là tuỳ chọn</span>
+
+					</div>
+                    
+					<div class="field">
+
+						<label>Ảnh sản phẩm</label>
+
+						<input type="file" size="30" name="upload_image" id="team-create-image" cclass="f-input" style="width:287px;" />
+
+						<?php if($team['image']){?><span class="hint"><?php echo team_image($team['image']); ?></span><?php }?>
+
+					</div>
+
+					<div class="field">
+
+						<label>Ảnh sản phẩm 1</label>
+
+						<input type="file" size="30" name="upload_image1" id="team-create-image1" class="f-input" style="width:287px;" />
+
+						<?php if($team['image1']){?>
+                        <span class="hint" id="team_image_1"><?php echo team_image($team['image1']); ?>&nbsp;&nbsp;<a href="javascript:;" onclick="X.team.imageremove(<?php echo $team['id']; ?>, 1);">delete</a></span>
+                        <?php }?>
+
+					</div>
+
+					<div class="field">
+
+						<label>Ảnh sản phẩm 2</label>
+
+						<input type="file" size="30" name="upload_image2" id="team-create-image2" class="f-input" />
+
+						<?php if($team['image2']){?>
+                        <span class="hint" id="team_image_2"><?php echo team_image($team['image2']); ?>&nbsp;&nbsp;<a href="javascript:;" onclick="X.team.imageremove(<?php echo $team['id']; ?>, 2);">delete</a></span>
+                        <?php }?>
+
+					</div>
+
+					<!-- them hinh cho deal 4-5 -->
+
+					<div class="field">
+
+						<label>Ảnh sản phẩm 3</label>
+
+						<input type="file" size="30" name="upload_image3" id="team-create-image3" class="f-input" style="width:287px;" />
+
+						<?php if($team['image3']){?>
+                        <span class="hint" id="team_image_3"><?php echo team_image($team['image3']); ?>&nbsp;&nbsp;<a href="javascript:;" onclick="X.team.imageremove(<?php echo $team['id']; ?>, 3);">xóa</a></span>
+                        <?php }?>
+
+					</div>
+
+					<div class="field">
+
+						<label>Ảnh sản phẩm 4</label>
+
+						<input type="file" size="30" name="upload_image4" id="team-create-image4" class="f-input" />
+
+						<?php if($team['image4']){?>
+                        <span class="hint" id="team_image_4"><?php echo team_image($team['image4']); ?>&nbsp;&nbsp;<a href="javascript:;" onclick="X.team.imageremove(<?php echo $team['id']; ?>, 4);">xóa</a>
+                        <?php }?>
+
+					</div>										
+
+					<!-- end -->
+
+					<!-- bo xung hinh cua phieu voucher -->
+
+					<div class="field">
+
+						<label>Ảnh voucher 1</label>
+
+						<input type="file" size="30" name="voucher_1" id="voucher-create-image1" class="f-input" style="width:287px;" />
+
+						<?php if($team['image5']){?>
+                        <span class="hint" id="team_image_5"><?php echo team_image($team['image5']); ?>&nbsp;&nbsp;<a href="javascript:;" onclick="X.team.imageremove(<?php echo $team['id']; ?>, 5);">xóa</a></span>
+                        <?php }?>
+
+					</div>
+
+					<div class="field">
+
+						<label>Ảnh voucher 2</label>
+
+						<input type="file" size="30" name="voucher_2" id="voucher-create-image2" class="f-input" />
+                        
+
+						<?php if($team['image6']){?>
+                        <span class="hint" id="team_image_6"><?php echo team_image($team['image6']); ?>&nbsp;&nbsp;<a href="javascript:;" onclick="X.team.imageremove(<?php echo $team['id']; ?>, 6);">xóa</a></span><?php }?>
+
+					</div>	
+                    
+					<div class="act"><input type="submit" value="Lưu" name="commit" id="leader-submit" class="formbutton" /></div>
+
+					<div class="field">
+
+						<label>Ảnh mẩu 1</label>
+						<input type="file" size="30" name="upload_image7" id="team-create-image7" class="f-input" style="width:287px;" />
+                        <label>Thông tin</label>
+                        <input type="text" style="width:275px;" size="256" name="infop1" class="f-input" value="<?php echo $team['infop1']; ?>"  />
+						<?php if($team['image7']){?>
+                        <span class="hint" id="team_image_7"><?php echo team_image($team['image7']); ?>&nbsp;&nbsp;<a href="javascript:;" onclick="X.team.imageremove(<?php echo $team['id']; ?>, 7);">xóa</a></span>
+                       	<?php }?>
+
+					</div>	
+					<div class="field">
+
+						<label>Ảnh mẩu 2</label>
+						<input type="file" size="30" name="upload_image8" id="team-create-image8" class="f-input" style="width:287px;" />
+                        <label>Thông tin</label>
+                        <input type="text" style="width:275px;" size="256" name="infop2" class="f-input" value="<?php echo $team['infop2']; ?>"  />
+						<?php if($team['image8']){?>
+                        <span class="hint" id="team_image_8"><?php echo team_image($team['image8']); ?>&nbsp;&nbsp;<a href="javascript:;" onclick="X.team.imageremove(<?php echo $team['id']; ?>, 8);">xóa</a></span>
+                       	<?php }?>
+
+					</div>	
+					<div class="field">
+
+						<label>Ảnh mẩu 3</label>
+						<input type="file" size="30" name="upload_image9" id="team-create-image9" class="f-input" style="width:287px;" />
+                        <label>Thông tin</label>
+                        <input type="text" style="width:275px;" size="256" name="infop3" class="f-input" value="<?php echo $team['infop3']; ?>"  />
+						<?php if($team['image9']){?>
+                        <span class="hint" id="team_image_9"><?php echo team_image($team['image9']); ?>&nbsp;&nbsp;<a href="javascript:;" onclick="X.team.imageremove(<?php echo $team['id']; ?>, 9);">xóa</a></span>
+                       	<?php }?>
+
+					</div>	
+					<div class="field">
+
+						<label>Ảnh mẩu 4</label>
+						<input type="file" size="30" name="upload_image10" id="team-create-image10" class="f-input" style="width:287px;" />
+                        <label>Thông tin</label>
+                        <input type="text" style="width:275px;" size="256" name="infop4" class="f-input" value="<?php echo $team['infop4']; ?>"  />
+						<?php if($team['image10']){?>
+                        <span class="hint" id="team_image_10"><?php echo team_image($team['image10']); ?>&nbsp;&nbsp;<a href="javascript:;" onclick="X.team.imageremove(<?php echo $team['id']; ?>, 10);">xóa</a></span>
+                       	<?php }?>
+
+					</div>	
+					<div class="field">
+
+						<label>Ảnh mẩu 5</label>
+						<input type="file" size="30" name="upload_image11" id="team-create-image11" class="f-input" style="width:287px;" />
+                        <label>Thông tin</label>
+                        <input type="text" style="width:275px;" size="256" name="infop5" class="f-input" value="<?php echo $team['infop5']; ?>"  />
+						<?php if($team['image11']){?>
+                        <span class="hint" id="team_image_11"><?php echo team_image($team['image11']); ?>&nbsp;&nbsp;<a href="javascript:;" onclick="X.team.imageremove(<?php echo $team['id']; ?>, 11);">xóa</a></span>
+                       	<?php }?>
+
+					</div>	
+					<div class="field">
+
+						<label>Ảnh mẩu 6</label>
+						<input type="file" size="30" name="upload_image12" id="team-create-image12" class="f-input" style="width:287px;" />
+                        <label>Thông tin</label>
+                        <input type="text" style="width:275px;" size="256" name="infop6" class="f-input" value="<?php echo $team['infop6']; ?>"  />
+						<?php if($team['image12']){?>
+                        <span class="hint" id="team_image_12"><?php echo team_image($team['image12']); ?>&nbsp;&nbsp;<a href="javascript:;" onclick="X.team.imageremove(<?php echo $team['id']; ?>, 12);">xóa</a></span>
+                       	<?php }?>
+
+					</div>	
+					<div class="field">
+
+						<label>Ảnh mẩu 7</label>
+						<input type="file" size="30" name="upload_image13" id="team-create-image13" class="f-input" style="width:287px;" />
+                        <label>Thông tin</label>
+                        <input type="text" style="width:275px;" size="256" name="infop7" class="f-input" value="<?php echo $team['infop7']; ?>"  />
+						<?php if($team['image13']){?>
+                        <span class="hint" id="team_image_13"><?php echo team_image($team['image13']); ?>&nbsp;&nbsp;<a href="javascript:;" onclick="X.team.imageremove(<?php echo $team['id']; ?>, 13);">xóa</a></span>
+                       	<?php }?>
+
+					</div>	
+					<div class="field">
+
+						<label>Ảnh mẩu 8</label>
+						<input type="file" size="30" name="upload_image14" id="team-create-image14" class="f-input" style="width:287px;" />
+                        <label>Thông tin</label>
+                        <input type="text" style="width:275px;" size="256" name="infop8" class="f-input" value="<?php echo $team['infop8']; ?>"  />
+						<?php if($team['image14']){?>
+                        <span class="hint" id="team_image_14"><?php echo team_image($team['image14']); ?>&nbsp;&nbsp;<a href="javascript:;" onclick="X.team.imageremove(<?php echo $team['id']; ?>, 14);">xóa</a></span>
+                       	<?php }?>
+
+					</div>	
+					<div class="field">
+
+						<label>Ảnh mẩu 9</label>
+						<input type="file" size="30" name="upload_image15" id="team-create-image15" class="f-input" style="width:287px;" />
+                        <label>Thông tin</label>
+                        <input type="text" style="width:275px;" size="256" name="infop9" class="f-input" value="<?php echo $team['infop9']; ?>"  />
+                        
+						<?php if($team['image15']){?>
+                        <span class="hint" id="team_image_15"><?php echo team_image($team['image15']); ?>&nbsp;&nbsp;<a href="javascript:;" onclick="X.team.imageremove(<?php echo $team['id']; ?>, 15);">xóa</a></span>
+                       	<?php }?>
+
+					</div>	
+					<!--<div class="field">
+
+						<label>Ảnh mẩu 10</label>
+						<input type="file" size="30" name="upload_image16" id="team-create-image16" class="f-input" style="width:287px;" />
+                        <label>Thông tin</label>
+                        <input type="text" style="width:275px;" size="256" name="infop10" class="f-input" value="<?php echo $team['infop10']; ?>"  />
+						<?php if($team['image16']){?>
+                        <!--<span class="hint" id="team_image_16"><?php echo team_image($team['image16']); ?>&nbsp;&nbsp;<a href="javascript:;" onclick="X.team.imageremove(<?php echo $team['id']; ?>, 16);">xóa</a></span>
+                       	<?php }?>
+
+					<!--</div>	-->
+					<div class="act"><input type="submit" value="Lưu" name="commit" id="leader-submit" class="formbutton" /></div>
+					<div class="field">
+
+						<label>Thông tin chi tiết</label>
+
+						<div style="float:left; width: 80%;"><?php echo $detail; ?></div>
+
+					</div>
+
+					<div class="wholetip clear"><h3>3. Thông tin SEO</h3></div>
+                    
+					<div class="field">
+						<label>SEO Tiêu đề</label>
+						<input type="text" size="30" name="seo_title" id="team-create-title" class="f-input" value="<?php echo $team['seo_title']; ?>" />
+					</div>
+					<div class="field">
+						<label>SEO từ khoá</label>
+						<input type="text" size="30" name="seo_keyword" id="team-create-keyword" class="f-input" value="<?php echo $team['seo_keyword']; ?>" />
+					</div>
+					<div class="field">
+						<label>SEO mô tả</label>
+						<div style="float:left;"><textarea cols="45" rows="5" name="seo_description" id="team-create-description" class="f-textarea"><?php echo htmlspecialchars($team['seo_description']); ?></textarea></div>
+					</div>
+                    
+					<div class="act"><input type="submit" value="Lưu" name="commit" id="leader-submit" class="formbutton" /></div>
+
+				</form>
+
+                </div>
+
+            </div>
+
+            <div class="box-bottom"></div>
+
+        </div>
+
+	</div>
+
+<div id="sidebar">
+
+</div>
+
+
+
+</div>
+
+</div> <!-- bd end -->
+
+</div> <!-- bdw end -->
+
+
+
+<script type="text/javascript">
+
+window.x_init_hook_teamchangetype = function(){
+
+	X.team.changetype("<?php echo $team['team_type']; ?>");
+
+};
+
+window.x_init_hook_page = function() {
+
+	X.team.imageremovecall = function(v) {
+
+		jQuery('#team_image_'+v).remove();
+
+	};
+
+	X.team.imageremove = function(id, v) {
+
+		return !X.get(WEB_ROOT + '/ajax/misc.php?action=imageremove&id='+id+'&v='+v);
+
+	};
+
+};
+
+</script>
+
+<?php include template("manage_footer");?>
+

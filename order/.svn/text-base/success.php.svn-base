@@ -1,0 +1,42 @@
+<?php
+require_once(dirname(dirname(__FILE__)) . '/app.php');
+need_login();
+$orderID = abs(intval($_GET['order_id']));
+$teamID = abs(intval($_GET['team_id']));
+$httt = $_GET['tt'];
+$bankID = abs(intval($_GET['bank']));
+
+$condition = array();$condition[]="id=$orderID";
+$orders = DB::LimitQuery('order',array('condition'=>$condition));
+if(is_array($orders)){
+	foreach ($orders as $order=>$donhang){
+		if($donhang['state']!='unpay'){
+		$donhang['price'];$donhang['quantity'];$donhang['code'];
+		}
+	 }
+}
+$condition = array();$condition[]="id=$teamID";
+$teams = DB::LimitQuery('team',array('condition'=>$condition));
+foreach ($teams as $team=>$sanpham) { $sanpham['title'];$sanpham['delivery'];$sanpham['fare']; }
+if($sanpham['delivery']=='express'){
+	if($sanpham['fare']>0 && $donhang['quantity']<$sanpham['farefree']){
+		// thu phí vận chuyển
+		$tongtien	=	formatMoney($sanpham['fare'] + $donhang['price']*$donhang['quantity'],0) ;
+	}
+	else $tongtien	=	formatMoney($donhang['price']*$donhang['quantity'],0) ;
+}
+$express = ($sanpham['delivery']=='express');
+if ( $express ) { $option_express = Utility::OptionArray(Table::Fetch('category', array('express'), 'zone'), 'id', 'name'); }
+if(!empty($bankID)){
+	$condition = array();$condition[]="id=$bankID";
+	$banks = DB::LimitQuery('bank',array('condition'=>$condition));
+	foreach ($banks as $bank=>$nganhang){ 
+		$nganhang['bankname_short'];$nganhang['bankname_long'];$nganhang['bankacc'];$nganhang['bankcode'];$nganhang['image']; $nganhang['id'];
+	}
+}
+switch ($httt) {
+	case "ct": $desc_payment	=	"thanh toán tại công ty";break;
+	case "ck": $desc_payment	=	"chuyển khoản";break;
+	case "tn": $desc_payment	=	"thu tiền tại nhà";break;
+}
+include template('order_success');

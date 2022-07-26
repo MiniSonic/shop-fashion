@@ -1,0 +1,74 @@
+<!--{if $INI['option']['cate_name9']}-->
+<!--${
+	$daytime = time();
+	$cate_id = abs(intval($INI['option']['cate_name11']));
+    $quantity_cate = abs(intval($INI['option']['cate_quantity11']));
+    if(empty($quantity_cate)) $cate_quantity = 6;
+    $cates = Table::Fetch('cate', $cate_id);
+    $cate_name = get_name_cate($cate_id);
+	$condition_cate = array(
+        'group_pid' => $cate_id,
+		"begin_time <= '$daytime'",
+		"end_time > '$daytime'",
+	
+	);
+	$team_cate = DB::LimitQuery('team', array(
+		'condition' => $condition_cate,
+		'order' => 'ORDER BY sort_order DESC, begin_time DESC,  id DESC',
+		'size' => $quantity_cate,
+	
+	));
+}-->
+
+<!--Cate deal-->    
+<div class="showproduct_cate">
+    <div class="product_top">
+        <div class="product_top_title"><a href="${rewrite_cate_shop($cate_id)}" title="{$cate_name}">{$cate_name}</a></div>
+        <div class="product_top_control"><a href="${rewrite_cate_shop($cate_id)}">Xem tất cả</a></div>
+    </div>
+    <div class="product_cate_content">
+        <!--<div class="cate_banner">
+            <a href="${rewrite_cate_shop($cate_id)}" target="_blank">
+                <img alt="{$cate_name}, {$INI['system']['keywordseo']}" src="/static/{$cates['image_cate']}" />
+            </a>
+        </div>-->
+        <div class="ls_cate_product" style="width:auto">
+        	<!--{loop $team_cate $one}-->
+            <div class="cate_product_item_4">
+				<div class="cate_product_item_title_4">
+                    <a href="${rewrite_team_id($one['id'])}">{$one['product']}</a>
+                </div>
+				<div class="clear"></div>
+                <div class="cate_product_item_img_4">
+                	<!--{if $team_type!='normal'}-->
+                    <span class="ribbon_{$one['team_type']}"></span>
+                    <!--{/if}-->
+                    <a href="${rewrite_team_id($one['id'])}">
+                        <img alt="{$one['product']}, {$INI['system']['keywordseo']}" src="${team_image($one['image'])}" />
+                    </a>
+                    <div class="cate_product_delivery">
+                    
+                    	<span class="cate_product_giaohang">
+                        	<span class="giao_{$one['delivery_type']}"></span>
+                            {$option_giaohang[$one['delivery_type']]}
+                        </span>
+                    </div>
+                </div>
+                <div class="cate_product_item_desc">
+				{$one['title']}
+				</div>
+                <div class="cate_product_item_info">
+                    <span class="deal_common_info sale_prc2">${formatMoney($one['team_price'])}đ</span> 
+                    <span class="deal_common_info discount_market">
+                        <span>${formatMoney($one['market_price'])}đ</span>
+                    </span>
+                    <span class="deal_common_info deal_number_buy_4">Có <span>{$one['now_number']}</span>người đã cùng rẻ
+                    </span>
+                </div>
+            </div>
+            <!--{/loop}-->
+        </div>
+    </div>
+</div>
+<!--End Cate deal--> 
+<!--{/if}-->

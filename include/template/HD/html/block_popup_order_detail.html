@@ -1,0 +1,66 @@
+<!--${
+    $team_orders = DB::LimitQuery('team_order', array(
+    	'condition' => array('order_id'=>$one['id']),
+        'order' => 'ORDER BY id DESC',
+    ));
+}-->
+<div class="detail-box">
+    <div class="order-detail-box">
+        <div class="btnClose"></div>
+        <div class="clear"></div>
+        <div class="order-table">
+            <table width="100%" cellspacing="0" cellpadding="0" class="orderdetail-table">
+                <thead>
+                    <tr>
+                        <th width="4%">STT</th>
+                        <th width="50%">Tên sản phẩm / Dịch vụ</th>
+                        <th width="15%">Đơn giá</th>
+                        <th width="10%">Số lượng</th>
+                        <th width="15%">Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--{loop $team_orders $index $team_order}-->
+                    <!--${
+                    	$team = Table::Fetch('team', $team_order['team_id']);
+                        $info = 'infop'.$team_order['info_id'];
+                        $team[$info] =  $team[$info]?$team[$info]:'Chọn ngẩu nhiên'; 
+                        $quantity = $team_order['quantity'];
+                        $price_sum = $quantity * $team['team_price'];
+                    }-->
+                    <tr class="even">
+                        <td class="center">${++$index}</td>
+                        <td>
+                        	<a target="_blank" title="Xem chi tiết" href="${rewrite_team_id($team['id'])}">{$team['product']}</a>
+                            [<i style="color: #E7433C;">{$team[$info]}</i>]
+                        </td>
+                        <td class="right dongia">${formatMoney($team['team_price'])}</td>
+                        <td class="center soluong">{$quantity}</td>
+                        <td class="right thanhtien">${formatMoney($price_sum)}</td>
+                    </tr>
+                    <!--{/loop}-->
+                    <tr class="odd">
+                        <td class="right" colspan="4">Phí vận chuyển</td>
+                        <td class="right">+${formatMoney($one['fare'])}</td>
+                    </tr>
+                    <tr class="even">
+                        <td class="right" colspan="4">Tổng giá trị đơn hàng</td>
+                        <td style="font-size: 100%;" class="right bold">${formatMoney($one['fare']+$one['total_price'])}</td>
+                    </tr>
+                    
+                    <tr class="odd">
+                        <td class="right bold" colspan="4">Thanh toán bằng tiền tích lũy</td>
+                        <td class="right boldOrange">${formatMoney($one['paymoney'])}</td>
+                    </tr>
+                    <tr class="even">
+                        <td class="right bold" colspan="4">Thanh toán bằng tiền mặt</td>
+                        <td style="font-size: 120%;color:red;" class="right bold">${formatMoney($one['fare']+$one['total_price']-$one['paymoney'])}</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</div>

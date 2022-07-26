@@ -1,0 +1,268 @@
+<div style="background-color:#fff;padding-bottom:20px;border-radius:3px;" class="personal_page">
+    <div class="wrap_cart">
+        <div class="cart_top cart_top_thanhtoan">&nbsp;</div>
+        <!-- end div.cart_content -->
+        <form action="/ThanhToan/AcceptOrder" method="POST" name="frmOrder" id="frmOrder">
+        <div class="cart_address">
+            <div class="cart_title">
+                <span class="c_title-ico"><img src="/include/template/{$INI['skin']['template']}/css/images/title_ico.png" alt=""></span>
+                <span class="c_title_text">địa chỉ nhận hàng</span>
+            </div>
+            
+            <div class="info_box">
+                <div class="info_box_top">
+                    <img style="float:left;" src="/include/template/{$INI['skin']['template']}/css/images/order_box_top.png" alt=""></div>
+                <div class="info_box_content">
+                    <div style="margin-top: 15px;" class="address_one">
+                        <span class="add_title">Họ và tên:<span style="color: Red;">*</span></span> 
+                        <span class="add_input"><input type="text" value="{$users['realname']}" name="FullName" id="FullName"></span>
+                    </div>
+                    <div class="address_one">
+                        <span class="add_title">Điện thoại:<span style="color: Red;">*</span></span> 
+                        <span class="add_input">
+                            <input type="text" onkeypress="blockNotNumber(event)" maxlength="12" value="{$users['mobile']}" name="tbxPhone" id="tbxPhone">
+                     	</span>
+                    </div>
+                    
+                    <div class="address_one">
+                        <span class="add_title">Tỉnh thành:<span style="color: Red;">*</span></span> 
+                        <span class="add_input">
+                            <select name="Province" id="Province" style="width: 210px;">
+                            	${Utility::Option($option_provinces,$users['province_id'],'Chọn thành phố')}
+                            </select>
+                            <input type="hidden" value="{$users['province_id']}" name="hdProvinceSelected" id="hdProvinceSelected">
+                        </span>
+                        <span style="width: 100px;" class="add_title">Quận huyện:<span style="color: Red;">*</span></span>
+                        <span class="add_input">
+                            <select name="District" id="District" style="width: 210px;">
+                            	${Utility::Option($option_districts,$users['district_id'],'Chọn Quận Huyện')}
+                            </select>
+                            <input type="hidden" value="{$users['district_id']}" name="hdDistrictSelected" id="hdDistrictSelected">
+                        </span>
+						
+                    </div>
+					<div class="address_one">
+					<span class="add_title">Phường Xã:<span style="color: Red;">*</span></span>
+                        <span class="add_input">
+                            <select name="Ward" id="Ward" style="width: 210px;">
+                            	${Utility::Option($option_wards,$users['ward_id'],'Chọn Phường Xã')}
+                            </select>
+                            <input type="hidden" value="{$users['ward_id']}" name="hdWardSelected" id="hdWardSelected">
+                        </span>
+                    </div>
+                    <div class="address_one">
+                        <span class="add_title">Số nhà, tên đường:<span style="color: Red;">*</span></span>
+                        <span class="add_input"><input type="text" value="{$users['address']}" name="tbxAddressDelivery" id="tbxAddressDelivery"></span>
+                    </div>
+                    <div style="" class="address_one">
+                        <span class="add_title">Lời nhắn:</span> <span class="add_input">
+                            <input type="text" value="" name="tbxNote" id="tbxNote">
+                      	</span>
+                    </div>
+                    <div style="margin-bottom: 20px;" class="address_one">
+                        <span class="add_title">Mã an toàn:<span style="color: Red;">*</span></span> 
+                        <span class="add_input">
+                            <input type="text" maxlength="10" style="width: 70px;" name="tbxCaptchaOrder" id="tbxCaptchaOrder">
+                      	</span> 
+                        <span id="captcha_box" class="add_input">
+        					<img src="/captcha/captcha.php" alt="{$tenngan} captcha" id="cpt_img" />
+                        </span>
+                        <span style="margin-left: 15px;" class="add_input">
+                            <img src="/include/template/{$INI['skin']['template']}/css/images/refreshcaptcha.png" alt="{$tenngan} captcha" style="cursor: pointer; margin-top: 8px;" id="btnRefreshCaptcha">
+                     	</span>
+                    </div>
+                </div>
+                <!-- end div.info_box_content -->
+                <div class="info_box_bottom"><img style="float:left;" src="/include/template/{$INI['skin']['template']}/css/images/order_box_bottom.png" alt=""></div>
+            </div>
+            <!-- end div.info_box -->
+        </div>
+        
+        <div class="cart_thanhtoan">
+            <div class="cart_title">
+                <span class="c_title-ico"><img src="/include/template/{$INI['skin']['template']}/css/images/title_ico.png" alt=""></span>
+                <span class="c_title_text">Chọn một trong các phương thức thanh toán sau</span>
+            </div>
+            <div class="info_box">
+                <div class="info_box_top">
+                    <img style="float:left;" src="/include/template/{$INI['skin']['template']}/css/images/order_box_top.png" alt="">
+              	</div>
+                <div class="info_box_content">
+                    <ul class="thanhtoan_list">
+                    	<!--{if $users['id']==0}-->
+                        <li class="thanhtoan_yellow">
+                        	<span style="width:100%;float:left;text-align:center;margin-top:10px;color:red;">
+                            	Chưa có phương thức thanh toán cho địa chỉ này
+                            </span>
+                     	</li>
+                        <!--{else}-->
+                        <!--{include block_method_list}-->
+                        <!--{/if}-->
+                    </ul>
+                </div>
+                <!-- end div.info_box_content -->
+                <div class="info_box_bottom">
+                    <img style="float:left;" src="/include/template/{$INI['skin']['template']}/css/images/order_box_bottom.png" alt="">
+            	</div>
+            </div>
+            <!-- end div.info_box -->
+        </div>
+        <div style="float: left; width: 666px; margin-top: 20px;margin-left: 10px; display: none;" class="cart_thanhtoan_info">
+            <div class="cart_title">
+                <span class="c_title-ico">
+                    <img src="/include/template/{$INI['skin']['template']}/css/images/title_ico.png" alt=""></span>
+                <span class="c_title_text">ghi chú thông tin thanh toán</span>
+            </div>
+            <div class="info_box">
+                <div class="info_box_top">
+                    <img src="/include/template/{$INI['skin']['template']}/css/images/order_box_top.png" alt=""></div>
+                <div class="info_box_content">
+                    <div style="float: left; width: 600px; margin-left: 30px; text-align: justify; font-family: Tahoma;
+                        font-size: 11px; margin-top: 10px; margin-bottom: 10px; color: #E6572B; font-style: italic;">
+                        Quý khách vui lòng để lại các thông tin thanh toán như Tên người thanh toán, Số
+                        tài khoản thanh toán, Mã số giao dịch (Nếu thanh toán bằng thẻ ATM hoặc chuyển khoản)
+                        để {$tenngan} có thể xác nhận thanh toán cho bạn.
+                    </div>
+                    <div style="float: left; width: 600px; margin-left: 30px; margin-bottom: 10px;">
+                        <div style="float: left; width: 120px; text-align: right;">Ghi chú thanh toán:</div>
+                        <div style="float: left; margin-left: 5px;">
+                            <input type="text" maxlength="190px" style="border: solid 1px gray; border-radius: 3px; width: 450px;" id="PaymentNote" name="PaymentNote">
+                     	</div>
+                    </div>
+                </div>
+                <!-- end div.info_box_content -->
+                <div class="info_box_bottom"><img src="/include/template/{$INI['skin']['template']}/css/images/order_box_bottom.png" alt=""></div>
+            </div>
+            <!-- end div.info_box -->
+        </div>
+        
+        <div class="cart_content">
+            <div class="cart_title">
+                <span style="margin-left: 10px;" class="c_title-ico">
+                    <img src="/include/template/{$INI['skin']['template']}/css/images/title_ico.png" alt="">
+             	</span>
+                <span class="c_title_text">thông tin đơn hàng của bạn</span>
+            </div>
+            <!-- begin cart content -->
+            <div class="cart_content_title">
+                <span class="title-del">STT</span>
+                <span class="title-product">Sản phẩm/Dịch vụ</span>
+                <span class="title-price">Đơn giá</span> 
+                <span class="title-soluong">Số lượng</span>
+                <span class="title-thanhtien">
+                	Thành tiền 
+                    <span style="margin: 0px; padding: 0px; float: right;" class="thanhtoan_viewdetail">
+                    	<span style="margin: 0px; padding: 0px; text-align: left;">
+                        </span>
+                 	</span>
+           		</span>
+               
+            </div>
+            <div class="cart_listitem">
+				<!--{loop $carts $index $one}-->
+                <!--${
+                    $hdOptionValue = $one['deal_info'];
+                    $info_id = intval(substr($hdOptionValue,-1));
+                    $deal_id = intval(substr($hdOptionValue,0,-1));
+                	$teams = Table::Fetch('team', $deal_id);
+                    $info = 'infop'.$info_id;
+                    $max_quantity = $teams['max_number'] - $teams['now_number'];
+                    $quantity = $one['quantity'];
+                    $price_sum = $quantity * $teams['team_price'];
+                    $price_total += $price_sum;
+                    $teams[$info] =  $teams[$info]?$teams[$info]:'Chọn ngẩu nhiên'; 
+                    $count++;
+                }-->
+                <div class="cart_item">
+                    <div class="item_row">
+                        <span style="margin-left: 0px;" class="title-del">{$count}</span></div>
+                    <div class="item_row">
+                        <span style="text-align: left;" class="title-product">
+                        	<a href="${rewrite_team_id($deal_id)}">
+                                &nbsp;{$teams['product']} [<i style="color: #E7433C;">{$teams[$info]}</i>]
+                            </a>
+                      	</span>
+                   	</div>
+                    <div class="item_row"><span class="title-price">${formatMoney($teams['team_price'])}</span></div>
+                    <div class="item_row"><span class="title-soluong">{$quantity}</span></div>
+                    <input type="hidden" value="{$quantity}" id="hdTotalQuantity" name="hdTotalQuantity">
+                    <div class="item_row"><span class="title-thanhtien">${formatMoney($price_sum)}</span></div>
+                   
+                </div>
+                <!--{/loop}-->
+                <!-- end div.cart_item -->
+                
+                <div class="sum_item" style="font-weight:bold">
+                    <span class="sum_item_title"><p>Tổng cộng&nbsp;</p></span>
+                    <span class="sum_item_value"><p>${formatMoney($price_total)}</p></span>
+                    <input type="hidden" value="{$price_total}" id="hdTotalPrice" name="hdTotalPrice">
+					<input type="hidden" value="0" id="hdpaymentCost" name="hdpaymentCost">
+                </div>
+               
+                <div style="background: #e9e9e9; font-weight: bold; color:red; font-size:14px" class="sum_item">
+                    <span class="sum_item_title"><p>Tổng tiền thanh toán&nbsp;</p></span>
+                    <span class="sum_item_value totalpaycost"><p></p></span>
+                  
+                </div>
+                <div style="background: #F4B82C; font-weight: bold;" class="sum_item cmoney_payment">
+                    <span class="sum_item_title"><p>Tổng số tiền tích lũy hiện có&nbsp;</p></span>
+                    <span class="sum_item_value total_cmoney"><p>{$user['money']}</p></span>
+                </div>
+                <div style="background: #F4B82C; font-weight: bold; color:red" class="sum_item cmoney_payment">
+                    <span class="sum_item_title"><p>Tổng số tiền phải thanh toán&nbsp;</p></span>
+                    <span class="sum_item_value totalpayaf"><p></p></span>
+                </div>
+                
+            </div>
+            <!-- end cart content -->
+        </div>
+    
+        
+    	<!--{if $users['money']>0&&!empty($users)}-->
+        <div style="float:left;margin-left:10px;" class="cmoney_notice">
+            <input type="checkbox" name="cbUseCmoney" id="cbUseCmoney" value="{$users['money']}" />
+            <label for="cbUseCmoney">Bạn có <b style="color:Red;">${formatMoney($users['money'])} đ</b> trong tài khoản tích lũy, bạn có muốn trừ vào giá trị đơn hàng này không.</label>
+      	</div>
+       	<!--{/if}-->
+        <div class="coupon_ct">
+            <span class="coupon_note">Nhập mã coupon để được hưởng khuyến mãi. Nếu bạn chưa có coupon, vui lòng để trống:</span> 
+            <span style="font-size: 12px; font-style: italic; float: left;margin-left: 10px; color: #E7582C; width: 100%; margin-top: 5px; margin-bottom: 10px;">
+            	(Lưu ý: Mã coupon chỉ có hiệu lực khi bạn đặt mua 1 hoặc nhiều deal trong chương trình khuyến mãi.)
+       		</span> 
+            <span class="coupon_input"><input type="text" maxlength="20" id="tbccoupon_code" name="tbccoupon_code"></span>
+            <span class="check_coupon">&nbsp;</span>
+        </div>
+    	<!--{if $users}-->
+        <div class="notice_coupon">
+            <span class="icon_rs"><img src="/include/template/{$INI['skin']['template']}/css/images/coupon_ico.png" alt=""></span> 
+            <span class="content_cp_rs"></span>
+            <span class="close_noteice_cp"><a href="javascript://">&nbsp;</a></span>
+        </div>
+        <!--{/if}-->
+        </form>
+        <!--${
+            $pay_banner = DB::LimitQuery('adsense', array(
+                'condition' => array('display'=>'Y', 'pos_ads'=>'pay_banner'),
+                'order' => 'ORDER BY order_sort ASC, id DESC',
+            ));
+        }-->
+        <div style="width:660px; margin:10px; float:left">
+            <a href="{$pay_banner['0']['url']}" target="_blank" title="{$pay_banner['0']['name']}">
+                <img alt="{$pay_banner['0']['name']}" src="${team_image($pay_banner['0']['image'])}" width="660" />
+            </a>
+        </div>
+        
+        
+        <div class="thanhtoan_control">
+            <div class="continous-shop">
+                <span class="btn_ctn_b"><a href="/">Tiếp tục mua hàng</a></span>
+            </div>
+            <div class="finish_order">
+                <span class="btn_finish_o">
+                	<a style="color: White !important; float: left; width: 100px;" href="javascript:">Hoàn tất</a>
+             	</span>
+            </div>
+        </div>
+    </div>
+
+</div>

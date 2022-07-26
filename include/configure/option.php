@@ -1,0 +1,28 @@
+<?php
+$value = array (
+  'cate_name1' => '19',
+  'cate_quantity1' => '8',
+  'cate_name2' => '18',
+  'cate_quantity2' => '8',
+  'cate_name3' => '17',
+  'cate_quantity3' => '8',
+  'cate_name4' => '2',
+  'cate_quantity4' => '12',
+  'cate_name5' => '1',
+  'cate_quantity5' => '8',
+  'cate_name6' => '76',
+  'cate_quantity6' => '8',
+  'cate_name7' => '107',
+  'cate_quantity7' => '8',
+  'cate_name8' => '5',
+  'cate_quantity8' => '8',
+  'cate_name9' => '102',
+  'cate_quantity9' => '8',
+  'cate_name10' => '109',
+  'cate_quantity10' => '8',
+  'cate_name11' => '110',
+  'cate_quantity11' => '8',
+  'cate_name12' => '0',
+  'cate_quantity12' => '4',
+);
+?>
